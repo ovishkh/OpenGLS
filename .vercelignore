@@ -1,0 +1,11 @@
+.git
+.gitignore
+README.md
+*.test.js
+tests/
+mocks/
+.DS_Store
+*.env.local
+*.env.development.local
+*.env.test.local
+.next/cache
