@@ -47,18 +47,18 @@ type ThemeMode = "light" | "dark";
 const lightTheme = {
   bg: "#ffffff",
   bgAlt: "#f5f5f5",
-  bgAlt2: "#eeeeee",
-  text: "#333333",
-  textMuted: "#666666",
-  border: "#dddddd",
+  bgAlt2: "#f0f0f0",
+  text: "#1e1e1e",
+  textMuted: "#555555",
+  border: "#e0e0e0",
   editor: "#ffffff",
   editorBg: "#fafafa",
   accent: "#0078d4",
-  statusBar: "#007acc",
+  statusBar: "#0078d4",
   canvas: "#ffffff",
-  grid: "rgba(0,0,0,0.04)",
-  gridMajor: "rgba(0,0,0,0.08)",
-  axes: "rgba(0,0,0,0.18)",
+  grid: "rgba(0,0,0,0.05)",
+  gridMajor: "rgba(0,0,0,0.1)",
+  axes: "rgba(0,0,0,0.2)",
 };
 
 const darkTheme = {
@@ -144,7 +144,7 @@ export default function Simulator() {
         overflow: "hidden",
       }}
     >
-      {/* Title bar with branding and theme toggle */}
+      {/* Title bar with branding (no theme toggle here anymore) */}
       <div
         style={{
           height: "28px",
@@ -178,23 +178,8 @@ export default function Simulator() {
           </span>
         </div>
 
-        {/* Right: theme toggle */}
-        <button
-          onClick={() => setTheme((prev) => (prev === "light" ? "dark" : "light"))}
-          style={{
-            padding: "4px 8px",
-            backgroundColor: "transparent",
-            color: currentTheme.textMuted,
-            border: `1px solid ${currentTheme.border}`,
-            borderRadius: "2px",
-            cursor: "pointer",
-            fontSize: "12px",
-            outline: "none",
-            transition: "all 200ms",
-          }}
-        >
-          {theme === "light" ? "🌙 Dark" : "☀️ Light"}
-        </button>
+        {/* Right: empty for balance */}
+        <div style={{ width: "100px" }} />
       </div>
 
       {/* Tab bar */}
@@ -205,6 +190,9 @@ export default function Simulator() {
         onAlgorithmChange={setAlgorithm}
         onGridToggle={() => setGridEnabled((prev) => !prev)}
         theme={theme}
+        onRun={runSimulation}
+        isRunning={isRunning}
+        onThemeChange={setTheme}
       />
 
       {/* Main editor + canvas split (60-40) */}
@@ -245,8 +233,6 @@ export default function Simulator() {
             encoding="UTF-8"
             onStepTableToggle={() => setStepTableOpen((prev) => !prev)}
             stepTableOpen={stepTableOpen}
-            onRun={runSimulation}
-            isRunning={isRunning}
             theme={theme}
           />
         </div>

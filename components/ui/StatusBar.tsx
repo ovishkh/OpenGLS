@@ -1,6 +1,6 @@
 /**
  * components/ui/StatusBar.tsx
- * VS Code-style status bar with Run++ button.
+ * VS Code-style status bar at the bottom of code editor.
  */
 
 "use client";
@@ -13,8 +13,6 @@ export interface StatusBarProps {
   encoding?: string;
   onStepTableToggle?: () => void;
   stepTableOpen?: boolean;
-  onRun?: () => void;
-  isRunning?: boolean;
   theme?: "light" | "dark";
 }
 
@@ -26,8 +24,6 @@ export default function StatusBar({
   encoding = "UTF-8",
   onStepTableToggle,
   stepTableOpen = false,
-  onRun,
-  isRunning = false,
   theme = "dark",
 }: StatusBarProps) {
   const isDark = theme === "dark";
@@ -67,27 +63,6 @@ export default function StatusBar({
       <span>
         Ln {cursorLine}, Col {cursorCol}
       </span>
-
-      {/* Run++ button */}
-      <button
-        onClick={onRun}
-        disabled={isRunning}
-        style={{
-          padding: "2px 8px",
-          backgroundColor: isRunning ? "rgba(255,255,255,0.2)" : "transparent",
-          color: textColor,
-          border: `1px solid ${textColor}`,
-          borderRadius: "2px",
-          fontFamily: "'Consolas', 'Courier New', monospace",
-          fontSize: "12px",
-          cursor: isRunning ? "not-allowed" : "pointer",
-          outline: "none",
-          transition: "all 200ms",
-          opacity: isRunning ? 0.7 : 1,
-        }}
-      >
-        {isRunning ? "⟳ Running..." : "▶ Run++"}
-      </button>
 
       {/* Step table toggle */}
       <button
